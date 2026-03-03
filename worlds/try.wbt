@@ -1,0 +1,47 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  basicTimeStep 16
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "OmniWheelMat_R"
+      coulombFriction [
+        2, 0.001
+      ]
+    }
+    ContactProperties {
+      material1 "OmniWheelMat_FL"
+      coulombFriction [
+        2, 0.001
+      ]
+      frictionRotation 2.0944 0
+    }
+    ContactProperties {
+      material1 "OmniWheelMat_FR"
+      coulombFriction [
+        2, 0.001
+      ]
+      frictionRotation -2.0944 0
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.31773345105726414 -0.8795150467039975 -0.3542580086610699 4.579287817588915
+  position 7.886524994003218 7.433056453343496 1.6048743829806285
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorTileSize 0.25 0.25
+  wallHeight 0.05
+}
+JF2 {
+
+  translation 2.7399087442517636e-05 0.002745203129632161 0.0003585532610963613
+  rotation -0.5773962520048753 -0.5773507603501483 0.5773037915117378 2.0943964675910016
+  controllerArgs [
+    ""
+  ]
+}

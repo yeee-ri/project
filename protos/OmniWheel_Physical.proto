@@ -1,0 +1,200 @@
+#VRML_SIM R2021b utf8
+# template language: javascript
+PROTO OmniWheel_Physical [
+  field SFVec3f    translation 0 0 0
+  field SFRotation rotation    0 0 1 0
+  field SFVec3f    anchor      0 0 0
+  field SFString   motorName   "wheel"
+  field SFString   sensorName  "wheelSensor"
+  field SFFloat    maxVelocity 20
+]
+{
+  HingeJoint {
+    jointParameters HingeJointParameters {
+      axis -1 0 0
+      anchor IS anchor
+    }
+    device [
+      RotationalMotor {
+        name IS motorName
+        maxVelocity IS maxVelocity
+      }
+      PositionSensor {
+        name IS sensorName
+      }
+    ]
+
+    endPoint Solid {
+      translation IS translation
+      rotation IS rotation
+      name "%{=fields.motorName.value}%_wheel"
+      children [
+        # ===== roller visual shape (re-used) =====
+        DEF SMALL_WHEEL_SHAPE Shape {
+          appearance PBRAppearance {
+            baseColor 0.2 0.2 0.2
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.02
+            radius 0.01
+          }
+        }
+
+        # ---------- Roller 1 ----------
+        DEF sr1 HingeJoint {
+          jointParameters HingeJointParameters { axis 0 1 0 anchor -0.02 0 0.05 }
+          endPoint Solid {
+            translation -0.02 0 0.05
+            name "%{=fields.motorName.value}%_roller1"
+            children [
+              DEF r1 Transform {
+                rotation -1 0 0 1.5708
+                children [ USE SMALL_WHEEL_SHAPE ]
+              }
+            ]
+            boundingObject USE r1
+            physics Physics { density -1 mass 0.02 }
+          }
+        }
+
+        # ---------- Roller 2 ----------
+        DEF sr2 HingeJoint {
+          jointParameters HingeJointParameters { axis 0 -0.707107 0.707107 anchor -0.02 0.03535 0.03535 }
+          endPoint Solid {
+            translation -0.02 0.03535 0.03535
+            name "%{=fields.motorName.value}%_roller2"
+            rotation 0 -0.7071067811865476 0.7071067811865476 0
+            children [
+              DEF r2 Transform {
+                rotation -1 0 0 2.27
+                children [ USE SMALL_WHEEL_SHAPE ]
+              }
+            ]
+            boundingObject USE r2
+            physics Physics { density -1 mass 0.02 }
+          }
+        }
+
+        # ---------- Roller 3 ----------
+        DEF sr3 HingeJoint {
+          jointParameters HingeJointParameters { axis 0 1 0 anchor -0.02 0 -0.05 }
+          endPoint Solid {
+            translation -0.02 0 -0.05
+            name "%{=fields.motorName.value}%_roller3"
+            children [
+              DEF r3 Transform {
+                rotation -1 0 0 1.5708
+                children [ USE SMALL_WHEEL_SHAPE ]
+              }
+            ]
+            boundingObject USE r3
+            physics Physics { density -1 mass 0.02 }
+          }
+        }
+
+        # ---------- Roller 4 ----------
+        DEF sr4 HingeJoint {
+          jointParameters HingeJointParameters { axis 0 -0.707107 0.707107 anchor -0.02 -0.03535 -0.03535 }
+          endPoint Solid {
+            translation -0.02 -0.03535 -0.03535
+            name "%{=fields.motorName.value}%_roller4"
+            rotation 0 -0.7071067811865476 0.7071067811865476 0
+            children [
+              DEF r4 Transform {
+                rotation -1 0 0 2.27
+                children [ USE SMALL_WHEEL_SHAPE ]
+              }
+            ]
+            boundingObject USE r4
+            physics Physics { density -1 mass 0.02 }
+          }
+        }
+
+        # ---------- Roller 5 ----------
+        DEF sr5 HingeJoint {
+          jointParameters HingeJointParameters { axis 0 0 1 anchor -0.02 0.05 0 }
+          endPoint Solid {
+            translation -0.02 0.05 0
+            name "%{=fields.motorName.value}%_roller5"
+            children [ DEF r5 Transform { children [ USE SMALL_WHEEL_SHAPE ] } ]
+            boundingObject USE r5
+            physics Physics { density -1 mass 0.02 }
+          }
+        }
+
+        # ---------- Roller 6 ----------
+        DEF sr6 HingeJoint {
+          jointParameters HingeJointParameters { axis 0 0 1 anchor -0.02 -0.05 0 }
+          endPoint Solid {
+            translation -0.02 -0.05 0
+            name "%{=fields.motorName.value}%_roller6"
+            children [ DEF r6 Transform { children [ USE SMALL_WHEEL_SHAPE ] } ]
+            boundingObject USE r6
+            physics Physics { density -1 mass 0.02 }
+          }
+        }
+
+        # ---------- Roller 7 ----------
+        DEF sr7 HingeJoint {
+          jointParameters HingeJointParameters { axis 0 0.707107 0.707107 anchor -0.02 0.03535 -0.03535 }
+          endPoint Solid {
+            translation -0.02 0.03535 -0.03535
+            name "%{=fields.motorName.value}%_roller7"
+            rotation 0 0.7071067811865476 0.7071067811865476 0
+            children [
+              DEF r7 Transform {
+                rotation -1 0 0 0.76
+                children [ USE SMALL_WHEEL_SHAPE ]
+              }
+            ]
+            boundingObject USE r7
+            physics Physics { density -1 mass 0.02 }
+          }
+        }
+
+        # ---------- Roller 8 ----------
+        DEF sr8 HingeJoint {
+          jointParameters HingeJointParameters { axis 0 0.707107 0.707107 anchor -0.02 -0.03535 0.03535 }
+          endPoint Solid {
+            translation -0.02 -0.03535 0.03535
+            name "%{=fields.motorName.value}%_roller8"
+            rotation 0 0.7071067811865476 0.7071067811865476 0
+            children [
+              DEF r8 Transform {
+                rotation -1 0 0 0.76
+                children [ USE SMALL_WHEEL_SHAPE ]
+              }
+            ]
+            boundingObject USE r8
+            physics Physics { density -1 mass 0.02 }
+          }
+        }
+
+        # ===== Big wheel body (visual) =====
+        Transform {
+          translation -0.02 0 0
+          rotation 0 -1 0 1.5708
+          children [
+            Shape {
+              appearance PBRAppearance { baseColor 0.8 0.8 0.8 roughness 1 metalness 0 }
+              geometry Cylinder { height 0.02 radius 0.05 subdivision 20 }
+            }
+          ]
+        }
+      ]
+
+      boundingObject Transform {
+        translation -0.02 0 0
+        rotation 0 -1 0 1.5708
+        
+        children [
+          Cylinder { height 0.02 radius 0.05 }
+        ]
+      }
+
+      physics Physics { density -1 mass 0.2 }
+    }
+  }
+}

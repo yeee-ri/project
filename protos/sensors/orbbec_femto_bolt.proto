@@ -1,0 +1,74 @@
+#VRML_SIM V7.2.5 utf8
+#orbbec_femto_bolt webot simulation model
+PROTO orbbec_femto_bolt [
+  field SFVec3f translation 0 0 0
+  field SFRotation rotation 0 1 0 0
+  field SFInt32 width 1280
+  field SFInt32 height 720
+#  field SFFloat fieldOfView 1.2217 #70 horizontal
+  field SFFloat fieldOfView 1.3962 #80 horizontal
+  field SFFloat maxRange 5
+  field SFFloat colorNoise 0.0
+  field SFFloat rangeNoise 0.0
+  #field SFString name "orbbec_femto_bolt"
+  field SFString name "kinect2"
+  field SFVec2f windowPosition 0 0
+  field SFFloat mass 0.5
+	field SFFloat pixelSize 0.5
+#  field SFVec3f translationRGB 0 -0.032 0.00806
+  field SFVec3f translationRGB 0 -0.032 0
+  field SFVec3f translationD 0 0 0.00428013
+]
+{
+Solid {
+  name "orbbec_femto_bolt"
+  translation IS translation
+  rotation IS rotation
+  children [
+    Transform{
+      translation 0 0 0
+      rotation 1 0 0 1.57
+      children[
+        Camera {
+          translation IS translationRGB
+          rotation  0 0 1 -1.57
+          name %{= '"' .. fields.name.value .. "RGB" .. '"' }%
+          fieldOfView IS fieldOfView
+          width IS width
+          height IS height
+          noise IS colorNoise
+        }
+        RangeFinder {
+#          translation IS translationD
+          translation IS translationRGB
+          rotation  0 0 1 -1.57
+          name %{= '"' .. fields.name.value .. "D" .. '"' }%
+          fieldOfView IS fieldOfView
+          width IS width
+          height IS height
+          maxRange IS maxRange
+          noise IS rangeNoise
+        }
+
+      ]
+    }
+
+
+    Transform{
+      rotation 0.57735 0.57735 0.57735 2.09439
+      children[
+      Shape {
+        appearance BrushedAluminium{colorOverride 0.3 0.3 0.9}
+        geometry DEF orbbec_femto_bolt Mesh {url "./meshes/orbbec_femto_bolt.stl"}
+      }
+
+
+
+
+      ]
+    }
+  ]
+  boundingObject Box {size 0.001 0.001 0.001}
+  physics Physics {density -1 mass IS mass}
+}
+}

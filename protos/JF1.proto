@@ -1,0 +1,80 @@
+#VRML_SIM V8.1.0 utf8
+
+PROTO JF1 [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 -1 1.5708
+  field  SFString    name            "jf1"
+  field  SFString    controller      "void"
+  field  MFString    controllerArgs  []
+  field  SFInt32     channel         0
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    name IS name
+    controller IS controller
+    controllerArgs IS controllerArgs
+
+    children [
+      InertialUnit {name "InertialUnit"}
+      Compass {name "Compass"}
+      GPS {name "GPS"}
+      DEF ACCEL Accelerometer {name "Accelerometer" lookupTable [-39.24 0 0 39.24 1024 0] }
+      DEF GYRO Gyro {name "Gyro" lookupTable [-27.925 0 0 27.925 1024 0]}
+
+      DEF RECEIVER Receiver { name "receiver" channel IS channel }
+      DEF EMITTER Emitter { name "emitter" channel IS channel }
+      DEF PHYSICS_RECEIVER Receiver { name "physics_receiver" type "serial" channel 10 byteSize 192 }
+      DEF PHYSICS_EMITTER Emitter { name "physics_emitter" type "serial" byteSize 96 }
+
+      Shape {
+        appearance DEF body PBRAppearance {baseColor 0.700000 0.700000 0.700000 transparency 0 roughness 1 metalness 1}
+        geometry DEF base_link Mesh {url "./meshes/base_link.stl"}
+      }
+
+      OmniWheel_Dual_152 {
+        rotation 1 0 0 0
+        translation 0.065 0 0.2
+        axis 0 0 1
+        anchor 0.065 0 0.2
+        name "OmniR"
+        wname "OmniR"
+        sensorName "OmniRSensor"
+        max_velocity 125.66# 20 rpm
+      }
+      OmniWheel_Dual_152 {
+        rotation 1 0 0 2.0944
+        axis 0 -0.8660 -0.5
+        anchor 0.065 -0.173205 -0.1
+        translation 0.065 -0.173205 -0.1
+        name "OmniFL"
+        wname "OmniFL"
+        sensorName "OmniFLSensor"
+        max_velocity 125.66# 20 rpm
+      }
+      OmniWheel_Dual_152 {
+        rotation 1 0 0 -2.0944
+        translation 0.065 0.173205 -0.1
+        axis 0 0.8660 -0.5
+        anchor 0.065  0.173205 -0.1
+        name "OmniFR"
+        wname "OmniFR"
+        sensorName "OmniFRSensor"
+        max_velocity 125.66# 20 rpm
+      }
+
+
+    ]
+
+    #BASE mass
+    boundingObject Transform {
+        translation 0 0 0
+        children [Box {size 0.05 0.05 0.05}]
+    }
+    physics Physics {
+      mass 10 density -1
+      centerOfMass [ -0.001 0 0 ]
+    }
+  }
+}

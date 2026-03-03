@@ -1,0 +1,336 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  info [
+    "SLAM test environment"
+  ]
+  title "Mecanum arena"
+  basicTimeStep 20
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "InteriorWheelMat"
+      coulombFriction [
+        5, 0, 0.4
+      ]
+      frictionRotation -0.9648 0
+      bounce 0
+      forceDependentSlip [
+        1, 0
+      ]
+    }
+    ContactProperties {
+      material1 "ExteriorWheelMat"
+      coulombFriction [
+        5, 0, 0.4
+      ]
+      frictionRotation 0.9648 0
+      bounce 0
+      forceDependentSlip [
+        1, 0
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.37365427276424495 -0.7569109294731752 -0.5361607308345858 2.1532443197494513
+  position -0.673622277825265 2.166011525230612 -0.07458445219081417
+}
+Background {
+  skyColor [
+    0.678431 0.847059 0.901961
+  ]
+}
+DirectionalLight {
+  ambientIntensity 0.8
+  direction -0.5 -2 -0.5
+  intensity 0.3
+  castShadows TRUE
+}
+DirectionalLight {
+  direction 0.5 -0.5 0.5
+  intensity 0.5
+}
+DirectionalLight {
+  direction -0.5 -0.5 0.5
+  intensity 0.5
+}
+DirectionalLight {
+  direction 0.5 0.5 0.5
+  intensity 0.5
+}
+RectangleArena {
+  floorSize 5 5
+  floorAppearance SandyGround {
+    colorOverride 0.5 0.5 0.5
+  }
+}
+Wall {
+  translation 0 0 1.525
+  name "wall(4)"
+  size 3 0.2 0.05
+  appearance Roughcast {
+    colorOverride 0.7 0.7 0.7
+  }
+}
+Wall {
+  translation 0 0 -1.525
+  name "wall(1)"
+  size 3 0.2 0.05
+  appearance Roughcast {
+    colorOverride 0.7 0.7 0.7
+  }
+}
+Wall {
+  translation 1.525 0 0
+  rotation 0 1 0 1.57
+  name "wall3"
+  size 3 0.2 0.05
+  appearance Roughcast {
+    colorOverride 0.7 0.7 0.7
+  }
+}
+Wall {
+  translation -1.525 0 0
+  rotation 0 1 0 1.57
+  name "wall3(1)"
+  size 3 0.2 0.05
+  appearance Roughcast {
+    colorOverride 0.7 0.7 0.7
+  }
+}
+Wall {
+  translation 0 0 1.125
+  rotation 0 1 0 1.57
+  name "wall_b1"
+  size 0.75 0.2 0.05
+  appearance Roughcast {
+    colorOverride 0.3 0.3 0.3
+  }
+}
+Wall {
+  translation 0 0 -1.125
+  rotation 0 1 0 1.57
+  name "wall_b2"
+  size 0.75 0.2 0.05
+  appearance Roughcast {
+    colorOverride 0.3 0.3 0.3
+  }
+}
+Wall {
+  translation 0.1625 0 0.75
+  name "wall_b3"
+  size 0.325 0.2 0.05
+  appearance Roughcast {
+    colorOverride 0.3 0.3 0.3
+  }
+}
+Wall {
+  translation 0.1625 0 -0.75
+  name "wall_b4"
+  size 0.325 0.2 0.05
+  appearance Roughcast {
+    colorOverride 0.3 0.3 0.3
+  }
+}
+Wall {
+  translation -1.3375 0 0
+  name "wall_b5"
+  size 0.325 0.2 0.05
+  appearance Roughcast {
+    colorOverride 0.3 0.3 0.3
+  }
+}
+Wall {
+  translation 1.4 0 0
+  rotation 0 1 0 1.57
+  name "itemstand"
+  size 1 0.2 0.2
+  appearance Roughcast {
+    colorOverride 0.5 0.5 0.5
+  }
+}
+AprilTag9cm {
+  translation 1.29 0.1 -0.3
+  rotation 0 1 0 1.57
+  textureUrl [
+    "textures/a0.jpg"
+  ]
+  name "ar0"
+}
+AprilTag9cm {
+  translation 1.29 0.1 -0.1
+  rotation 0 1 0 1.57
+  textureUrl [
+    "textures/a1.jpg"
+  ]
+  name "ar1"
+}
+AprilTag9cm {
+  translation 1.29 0.1 0.1
+  rotation 0 1 0 1.57
+  textureUrl [
+    "textures/a2.jpg"
+  ]
+  name "ar2"
+}
+AprilTag9cm {
+  translation 1.29 0.1 0.3
+  rotation 0 1 0 1.57
+  textureUrl [
+    "textures/a3.jpg"
+  ]
+  name "ar3"
+}
+GenericCan {
+  translation 1.3499999999999266 0.24999430699198186 -0.2999922400375476
+  rotation 1 8.768655964843385e-13 9.58193585580921e-09 0.0001552020201575131
+  color 1 0 0
+  height 0.1
+  name "can1"
+}
+GenericCan {
+  translation 1.3499998999629867 0.24999441345618442 -0.09999186061254725
+  rotation 0.9999249229898047 -1.9816193076285836e-05 0.012253488937916182 0.0001627884857077133
+  color 1 1 0
+  height 0.1
+  name "can2"
+}
+GenericCan {
+  translation 1.3499999999999845 0.24999438352242703 0.10001577465942271
+  rotation 1 6.681088735757585e-14 1.0099816476979855e-09 0.00031546822157953414
+  color 0 1 0
+  radius 0.02
+  height 0.1
+  name "can3"
+}
+GenericCan {
+  translation 1.3499999999998817 0.24999456432485676 0.3000165345886085
+  rotation 1 1.2246624716395987e-12 7.228353784740014e-09 0.0003307023451881094
+  color 0 0 1
+  radius 0.02
+  height 0.1
+  name "can4"
+}
+Wall {
+  translation 0.75 0 -1.3125
+  name "goal1"
+  size 0.375 0.2 0.375
+  appearance Roughcast {
+    colorOverride 0.5 0.5 0.5
+  }
+}
+AprilTag9cm {
+  translation 0.75 0.1 -1.12
+  rotation 0 1 0 3.1415
+  textureUrl [
+    "textures/a4.jpg"
+  ]
+  name "ar4"
+}
+Wall {
+  translation 1 0 1.3125
+  name "goal2"
+  size 0.375 0.2 0.375
+  appearance Roughcast {
+    colorOverride 0.5 0.5 0.5
+  }
+}
+AprilTag9cm {
+  translation 1 0.1 1.12
+  textureUrl [
+    "textures/a5.jpg"
+  ]
+  name "ar5"
+}
+Wall {
+  translation -1.3125 0 -1.3125
+  name "goal3"
+  size 0.375 0.2 0.375
+  appearance Roughcast {
+    colorOverride 0.5 0.5 0.5
+  }
+}
+AprilTag9cm {
+  translation -1.12 0.1 -1.3125
+  rotation 0 1 0 -1.57
+  textureUrl [
+    "textures/a6.jpg"
+  ]
+  name "ar6"
+}
+AprilTag9cm {
+  translation -1.3125 0.1 -1.12
+  rotation 0 1 0 3.1415
+  textureUrl [
+    "textures/a6.jpg"
+  ]
+  name "ar6b"
+}
+Wall {
+  translation -1.3125 0 1.3125
+  name "goal4"
+  size 0.375 0.2 0.375
+  appearance Roughcast {
+    colorOverride 0.5 0.5 0.5
+  }
+}
+AprilTag9cm {
+  translation -1.12 0.1 1.3125
+  rotation 0 1 0 -1.57
+  textureUrl [
+    "textures/a7.jpg"
+  ]
+  name "ar7"
+}
+AprilTag9cm {
+  translation -1.3125 0.1 1.12
+  textureUrl [
+    "textures/a7.jpg"
+  ]
+  name "ar7b"
+}
+JF2 {
+  hidden position_0_0 -1.1217314315603072e-09
+  hidden position_0_1 -1.8612821957807713e-08
+  hidden position_0_2 -9.71479403465067e-05
+  hidden linearVelocity_0 3.298075052555309e-09 2.1836171691690497e-07 2.8304827345630423e-08
+  hidden angularVelocity_0 7.33100302183086e-07 -3.19901833599523e-11 -8.40110288743472e-08
+  hidden position_19_0 2.4968412121542824e-10
+  hidden position_20_0 1.8276195478460957e-08
+  hidden linearVelocity_20 4.229061023094774e-09 2.1841045152956273e-07 3.640066031738709e-08
+  hidden angularVelocity_20 7.330998751872891e-07 -2.6282607268305077e-09 -8.401282007752855e-08
+  hidden position_21_0 1.548090771786518e-08
+  hidden linearVelocity_21 7.2319677455203805e-09 2.179903518097383e-07 6.251403354414331e-08
+  hidden angularVelocity_21 7.330997766270926e-07 -2.628213950961244e-09 -8.401345026337987e-08
+  hidden position_22_0 4.655905464986999e-09
+  hidden linearVelocity_22 1.1276862661128596e-08 2.1668842361759413e-07 9.771272302336698e-08
+  hidden angularVelocity_22 7.330998194247225e-07 -2.6281099987964633e-09 -8.401410058403306e-08
+  hidden position_23_0 1.2030931361909697e-11
+  hidden position_23_1 -3.579114854436947e-12
+  hidden linearVelocity_23 1.126907941773466e-08 2.127529879403083e-07 9.777158181623696e-08
+  hidden angularVelocity_23 7.330998150164064e-07 -2.6280755531405927e-09 -8.40139789133053e-08
+  hidden linearVelocity_24 1.1257071716313389e-08 2.0884734134726486e-07 9.779147521656251e-08
+  hidden angularVelocity_24 7.330998184912953e-07 -2.6280749962956655e-09 -8.401410869095225e-08
+  hidden linearVelocity_25 1.1271436395501728e-08 2.115961229847477e-07 9.78311011367098e-08
+  hidden angularVelocity_25 7.330997981812896e-07 -2.6280748527825213e-09 -8.401412494644227e-08
+  hidden linearVelocity_26 7.357013111868188e-09 2.2229247816340576e-07 2.3746081586549937e-08
+  hidden angularVelocity_26 7.334728319911194e-07 -1.9835235529716963e-11 -8.3903569297062e-08
+  hidden rotation_27 0.9999999999999999 9.305454206307754e-09 -5.37237927536476e-09 2.0944
+  hidden linearVelocity_27 -9.632059693842705e-09 1.8329836371883086e-07 -1.3861759761633852e-07
+  hidden angularVelocity_27 7.340996959610603e-07 5.103102614473625e-11 -8.750121606674638e-08
+  hidden rotation_28 -0.9999999984270507 -4.8574190006117976e-05 -2.804365761422003e-05 2.09440000136221
+  hidden linearVelocity_28 7.197383122629658e-09 2.483855408755413e-07 1.566745670083296e-07
+  hidden angularVelocity_28 7.325688481649307e-07 -1.558002861771802e-10 -8.766432714410662e-08
+  translation 0.00019471922795850655 0.0027316399989906065 -0.33881411209361545
+  rotation -0.5774991977264079 -0.5774326884675457 0.5771188499039842 2.094642397303154
+  controllerArgs [
+    ""
+  ]
+}
+TBA_2021 {
+  translation 0 0 0
+  rotation 0.5775484218729166 0.5768972339400333 0.5776048838647765 -2.0951577097212604
+}
+CeilingLight {
+  translation 0 1.55 0
+}

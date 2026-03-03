@@ -1,0 +1,69 @@
+#VRML_SIM R2021b utf8
+
+PROTO OmniWheel_Dual_152 [
+  field SFVec3f translation 0 0 0
+  field SFVec3f axis 0 1 0
+  field SFRotation rotation 0 1 0 0
+  field SFVec3f anchor 0 0 0
+  field SFString name "wheel"
+  field SFString wname "wheel"
+  field SFString sensorName "wheel_sensor"
+  field SFFloat max_velocity 14.84
+]
+{
+  HingeJoint {
+    device [
+      RotationalMotor {
+        name IS name
+        maxVelocity IS max_velocity
+      }
+      PositionSensor {
+        name IS sensorName
+      }
+    ]
+    jointParameters HingeJointParameters {
+      axis IS axis
+      anchor IS anchor
+    }
+    endPoint DEF WHEEL_SOLID Solid {
+      translation IS translation
+      rotation IS rotation
+      name IS wname
+      children [
+        DEF WHEEL_TRANS Transform {
+          translation 0 0 0.0025
+          rotation 1 0 0 0
+          children [
+            Transform {
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.2 0.2 0.2
+                    roughness 1
+                    metalness 0.9
+                  }
+                  geometry Mesh { url "meshes/DOUBLE_OMNI_WHEEL.stl" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      contactMaterial "OmniWheelMat"
+      boundingObject Transform {
+        translation 0 0 0.005
+        rotation 1 0 0 1.5708
+        children [
+          Cylinder {
+            height 0.02
+            radius 0.076
+          }
+        ]
+      }
+      physics Physics {
+        density -1
+        mass 0.00625
+      }
+    }
+  }
+}

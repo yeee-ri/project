@@ -1,0 +1,11 @@
+Webots Proto Cache File version 1.5
+protoFileHash: 790ec4abaec2ec08775e0a035078277c
+needsRobotAncestor: 1
+baseType: Solid
+slotType: 
+parameters: translation,rotation,width,height,fieldOfView,maxRange,colorNoise,rangeNoise,name,windowPosition,mass,pixelSize,translationRGB,translationD
+tags: 
+license: 
+licenseUrl: 
+documentationUrl: 
+info: Azure\skinect\swebot\ssimulation\smodel\n

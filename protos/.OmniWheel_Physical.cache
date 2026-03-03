@@ -1,0 +1,11 @@
+Webots Proto Cache File version 1.5
+protoFileHash: add4346c2a7d0beb5e6315d6b80c9606
+needsRobotAncestor: 1
+baseType: HingeJoint
+slotType: 
+parameters: translation,rotation,anchor,motorName,sensorName,maxVelocity
+tags: 
+license: 
+licenseUrl: 
+documentationUrl: 
+info: 

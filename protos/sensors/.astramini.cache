@@ -1,0 +1,11 @@
+Webots Proto Cache File version 1.5
+protoFileHash: d2e040ca332091495eeb6f66e7c730c0
+needsRobotAncestor: 1
+baseType: Solid
+slotType: 
+parameters: translation,rotation,width,height,widthRGB,heightRGB,fieldOfView,fieldOfViewRGB,minRange,maxRange,colorNoise,rangeNoise,name,windowPosition,mass,pixelSize
+tags: 
+license: 
+licenseUrl: 
+documentationUrl: 
+info: ASTRA\sMINI:\sHFOV\s60\sVHOV\s49.5\n

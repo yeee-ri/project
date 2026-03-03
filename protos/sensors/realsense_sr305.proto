@@ -1,0 +1,63 @@
+#VRML_SIM V7.2.5 utf8
+
+PROTO realsense_sr305 [
+  #field SFVec3f translation 0 0.02 0
+  field SFVec3f translation 0 0 0
+  field SFRotation rotation 0 1 0 0
+  #field SFInt32 width 256 #256 #512
+  #field SFInt32 height 212 #212 #424
+  #field SFInt32 widthRGB 960 #1920
+  #field SFInt32 heightRGB 540 #1080
+  #field SFFloat fieldOfView 1.2217 #70 horizontal
+  #field SFFloat fieldOfViewRGB 1.38
+
+  field SFInt32 width 640
+  field SFInt32 height 480
+  field SFInt32 widthRGB 640
+  field SFInt32 heightRGB 480
+
+  field SFFloat fieldOfView 1.2113 #69.4 horizontal for D415
+  field SFFloat fieldOfViewRGB 1.2113
+
+  field SFFloat maxRange 5
+  field SFFloat colorNoise 0.0
+  field SFFloat rangeNoise 0.0
+  field SFString name "kinect2"
+  field SFVec2f windowPosition 0 0
+  field SFFloat mass 0.5
+	field SFFloat pixelSize 0.5
+]
+{
+Solid {
+  translation IS translation
+  rotation IS rotation
+  name IS name
+  children [
+    Camera {
+      translation -0.02 0 0
+      name %{= '"' .. fields.name.value .. "RGB" .. '"' }%
+      fieldOfView IS fieldOfViewRGB
+      width IS widthRGB
+      height IS heightRGB
+      noise IS colorNoise
+    }
+    RangeFinder {
+      translation -0.02 0 0
+      name %{= '"' .. fields.name.value .. "D" .. '"' }%
+      fieldOfView IS fieldOfView
+      width IS width
+      height IS height
+      maxRange IS maxRange
+      noise IS rangeNoise
+    }
+    Shape {
+      appearance Appearance {
+        material Material {specularColor 0.5 0.5 1.0}
+      }
+      geometry Box {size 0.14 0.026 0.0128}
+    }
+  ]
+  boundingObject Box {size 0.14 0.026 0.0128}
+  physics Physics {density -1 mass IS mass}
+}
+}

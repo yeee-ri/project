@@ -1,0 +1,11 @@
+Webots Proto Cache File version 1.5
+protoFileHash: af1d323b07e32351a300f2b194431e09
+needsRobotAncestor: 1
+baseType: Solid
+slotType: 
+parameters: translation,rotation,width,height,fieldOfView,maxRange,colorNoise,rangeNoise,name,windowPosition,mass,pixelSize,translationRGB,translationD
+tags: 
+license: 
+licenseUrl: 
+documentationUrl: 
+info: orbbec_femto_bolt\swebot\ssimulation\smodel\n

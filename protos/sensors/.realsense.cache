@@ -1,0 +1,11 @@
+Webots Proto Cache File version 1.5
+protoFileHash: bed6171aba8fa633e1d285316db723ce
+needsRobotAncestor: 1
+baseType: Solid
+slotType: 
+parameters: translation,rotation,width,height,widthRGB,heightRGB,fieldOfView,fieldOfViewRGB,maxRange,colorNoise,rangeNoise,name,windowPosition,mass,pixelSize
+tags: 
+license: 
+licenseUrl: 
+documentationUrl: 
+info: Realsense\sD435\smodel\n
