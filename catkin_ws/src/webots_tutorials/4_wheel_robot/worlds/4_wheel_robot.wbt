@@ -1,0 +1,14 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.8121290713249877 0.5564199782360559 0.1756222631917722 0.704968670072722
+  position 0.6347660588420954 1.7942803623156618 2.009315135444346
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+}
