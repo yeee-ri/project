@@ -1,4 +1,5 @@
-Webots file: webots home_service.wbt 
+SIMULATION:
+webots home_service.wbt 
 
 rosrun tf2_ros static_transform_publisher 0 0 0 0 0 0 base_link laser
 
