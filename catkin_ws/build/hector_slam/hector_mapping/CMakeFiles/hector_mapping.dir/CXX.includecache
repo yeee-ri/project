@@ -302,10 +302,6 @@ boost/thread.hpp
 PoseInfoContainer.h
 /home/sj/Desktop/project/catkin_ws/src/hector_slam/hector_mapping/src/PoseInfoContainer.h
 
-/home/sj/Desktop/project/catkin_ws/src/hector_slam/hector_mapping/src/PoseInfoContainer.cpp
-PoseInfoContainer.h
-/home/sj/Desktop/project/catkin_ws/src/hector_slam/hector_mapping/src/PoseInfoContainer.h
-
 /home/sj/Desktop/project/catkin_ws/src/hector_slam/hector_mapping/src/PoseInfoContainer.h
 tf/transform_datatypes.h
 -
@@ -1768,44 +1764,12 @@ Quaternion.h
 ros/macros.h
 -
 
-/opt/ros/noetic/include/tf/LinearMath/MinMax.h
-
-/opt/ros/noetic/include/tf/LinearMath/QuadWord.h
-Scalar.h
-/opt/ros/noetic/include/tf/LinearMath/Scalar.h
-MinMax.h
-/opt/ros/noetic/include/tf/LinearMath/MinMax.h
-altivec.h
--
-
 /opt/ros/noetic/include/tf/LinearMath/Quaternion.h
 Vector3.h
 /opt/ros/noetic/include/tf/LinearMath/Vector3.h
 QuadWord.h
 /opt/ros/noetic/include/tf/LinearMath/QuadWord.h
 ros/macros.h
--
-
-/opt/ros/noetic/include/tf/LinearMath/Scalar.h
-math.h
--
-stdlib.h
--
-cstdlib
--
-cfloat
--
-float.h
--
-ppcintrinsics.h
--
-assert.h
--
-assert.h
--
-assert.h
--
-assert.h
 -
 
 /opt/ros/noetic/include/tf/LinearMath/Transform.h

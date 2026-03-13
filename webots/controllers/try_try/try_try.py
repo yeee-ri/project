@@ -98,6 +98,8 @@ class OmniROSBridge:
     def cb_cmdvel(self, msg: Twist):
         self.last_cmd_msg = msg
         self.last_cmd_time = rospy.Time.now()
+        rospy.loginfo("cmd_vel received: vx=%.3f vy=%.3f wz=%.3f",
+                  msg.linear.x, msg.linear.y, msg.angular.z)
 
     def read_keyboard_cmd(self):
         vx = 0.0

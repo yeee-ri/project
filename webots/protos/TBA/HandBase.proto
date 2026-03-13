@@ -8,7 +8,7 @@ PROTO HandBase [
     translation IS translation
     children [
       Transform{
-        translation 0.03 0 0
+        translation 0.06 0 0.15 #0.075 0 0.15
         children[
           Shape {
             appearance DEF POS_APP Appearance {
@@ -19,7 +19,7 @@ PROTO HandBase [
         ]
       }
       Transform{
-        translation 0 0 0
+        translation 0.03 0 0.15
         children[
           Shape {
             appearance USE POS_APP

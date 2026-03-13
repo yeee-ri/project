@@ -3,7 +3,7 @@
 PROTO TBA_2021 [
   field SFVec3f    translation    0 0.12 0
   field SFRotation rotation       1 0 0 -1.5708
-  field SFString   controller     "n1bot"
+  field SFString   controller     "control"
   field MFString   controllerArgs "2"
 ]
 {
@@ -149,7 +149,7 @@ Robot {
                                     PositionSensor{ name "GripperRSensor"}
                                   ]
                                   endPoint Solid {
-                                    translation 0.04 -0.005 0
+                                    translation 0.07 -0.005 0.15
                                     children [
                                       Transform{
                                         translation 0.04 0 0
@@ -171,7 +171,7 @@ Robot {
                                     PositionSensor{ name "GripperLSensor"}
                                   ]
                                   endPoint Solid {
-                                    translation 0.04 0.005 0
+                                    translation 0.07 0.005 0.15
                                     children [
                                       Transform{
                                         translation 0.04 0 0
@@ -192,7 +192,7 @@ Robot {
                     }# End Arm3
                   ]
                   boundingObject Transform {
-                    translation 0 0 0
+                    translation 0 0 0.07
                     children [Box {size 0.05 0.05 0.05}]
                   }
                 }

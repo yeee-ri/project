@@ -26,8 +26,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.31773345105726414 -0.8795150467039975 -0.3542580086610699 4.579287817588915
-  position 7.886524994003218 7.433056453343496 1.6048743829806285
+  orientation -0.018674491298637002 -0.9997937610535768 -0.007981148606613666 2.875681098824718
+  position -0.04809692710949733 0.0728540907895127 -0.41463415872668785
 }
 TexturedBackground {
 }
@@ -38,10 +38,29 @@ RectangleArena {
   wallHeight 0.05
 }
 JF2 {
-
   translation 2.7399087442517636e-05 0.002745203129632161 0.0003585532610963613
   rotation -0.5773962520048753 -0.5773507603501483 0.5773037915117378 2.0943964675910016
   controllerArgs [
     ""
   ]
+}
+Solid {
+  translation 0.23 0.07 0
+  scale 0.8 0.8 0.8
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  boundingObject Shape {
+    appearance PBRAppearance {
+    }
+    geometry Box {
+      size 0.1 0.1 0.1
+    }
+  }
 }
