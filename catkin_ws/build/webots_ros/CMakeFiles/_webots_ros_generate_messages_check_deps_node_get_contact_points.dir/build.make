@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/sj/Desktop/project/catkin_ws/build
 include webots_ros/CMakeFiles/_webots_ros_generate_messages_check_deps_node_get_contact_points.dir/progress.make
 
 webots_ros/CMakeFiles/_webots_ros_generate_messages_check_deps_node_get_contact_points:
-	cd /home/sj/Desktop/project/catkin_ws/build/webots_ros && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py webots_ros /home/sj/Desktop/project/catkin_ws/src/webots_ros/srv/node_get_contact_points.srv geometry_msgs/Point:webots_ros/ContactPoint
+	cd /home/sj/Desktop/project/catkin_ws/build/webots_ros && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py webots_ros /home/sj/Desktop/project/catkin_ws/src/webots_ros/srv/node_get_contact_points.srv webots_ros/ContactPoint:geometry_msgs/Point
 
 _webots_ros_generate_messages_check_deps_node_get_contact_points: webots_ros/CMakeFiles/_webots_ros_generate_messages_check_deps_node_get_contact_points
 _webots_ros_generate_messages_check_deps_node_get_contact_points: webots_ros/CMakeFiles/_webots_ros_generate_messages_check_deps_node_get_contact_points.dir/build.make

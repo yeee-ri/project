@@ -7,9 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/sj/Desktop/project/catkin_ws/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH='/home/sj/Desktop/project/catkin_ws/devel/lib:/home/sj/catkin_ws/devel/lib:/opt/ros/noetic/lib:/opt/ros/noetic/lib/x86_64-linux-gnu:/usr/local/cuda/lib64'
-export PKG_CONFIG_PATH="/home/sj/Desktop/project/catkin_ws/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD='/home/sj/Desktop/project/catkin_ws/build'
-export PYTHONPATH="/home/sj/Desktop/project/catkin_ws/devel/lib/python3/dist-packages:$PYTHONPATH"
-export ROS_PACKAGE_PATH="/home/sj/Desktop/project/catkin_ws/src:$ROS_PACKAGE_PATH"

@@ -818,6 +818,9 @@ message_runtime_DIR:PATH=/opt/ros/noetic/share/message_runtime/cmake
 //Value Computed by CMake
 move_base_BINARY_DIR:STATIC=/home/sj/Desktop/project/catkin_ws/build/navigation/move_base
 
+//The directory containing a CMake configuration file for move_base.
+move_base_DIR:PATH=/home/sj/Desktop/project/catkin_ws/devel/share/move_base/cmake
+
 //Dependencies for the target
 move_base_LIB_DEPENDS:STATIC=general;base_local_planner;general;trajectory_planner_ros;general;clear_costmap_recovery;general;navfn;general;rotate_recovery;general;costmap_2d;general;layers;general;/opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/noetic/lib/liblaser_geometry.so;general;/opt/ros/noetic/lib/libtf.so;general;voxel_grid;general;/opt/ros/noetic/lib/libclass_loader.so;general;/usr/lib/x86_64-linux-gnu/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/noetic/lib/libroslib.so;general;/opt/ros/noetic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython3.8.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/usr/lib/liborocos-kdl.so;general;/usr/lib/liborocos-kdl.so;general;/opt/ros/noetic/lib/libtf2_ros.so;general;/opt/ros/noetic/lib/libactionlib.so;general;/opt/ros/noetic/lib/libmessage_filters.so;general;/opt/ros/noetic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0;general;/opt/ros/noetic/lib/librosconsole.so;general;/opt/ros/noetic/lib/librosconsole_log4cxx.so;general;/opt/ros/noetic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0;general;/opt/ros/noetic/lib/libxmlrpcpp.so;general;/opt/ros/noetic/lib/libtf2.so;general;/opt/ros/noetic/lib/libroscpp_serialization.so;general;/opt/ros/noetic/lib/librostime.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0;general;/opt/ros/noetic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
 
@@ -1038,6 +1041,12 @@ voxel_grid_SOURCE_DIR:STATIC=/home/sj/Desktop/project/catkin_ws/src/navigation/v
 warehouse_ros_DIR:PATH=/opt/ros/noetic/share/warehouse_ros/cmake
 
 //Value Computed by CMake
+webots_nav_BINARY_DIR:STATIC=/home/sj/Desktop/project/catkin_ws/build/webots_nav
+
+//Value Computed by CMake
+webots_nav_SOURCE_DIR:STATIC=/home/sj/Desktop/project/catkin_ws/src/webots_nav
+
+//Value Computed by CMake
 webots_ros_BINARY_DIR:STATIC=/home/sj/Desktop/project/catkin_ws/build/webots_ros
 
 //Value Computed by CMake
@@ -1212,7 +1221,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=20
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=38
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

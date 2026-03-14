@@ -1,0 +1,14 @@
+<launch>
+  <node pkg="move_base" type="move_base" name="move_base" output="screen" clear_params="true">
+
+    <param name="controller_frequency" value="3.0" />
+    <param name="planner_frequency" value="1.0" />
+    <param name="controller_patience" value="5.0" />
+    <param name="planner_patience" value="5.0" />
+    <rosparam file="$(find webots_nav)/config/costmap_common.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find webots_nav)/config/costmap_common.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find webots_nav)/config/global_costmap.yaml" command="load" />
+    <rosparam file="$(find webots_nav)/config/local_costmap.yaml" command="load" />
+    <rosparam file="$(find webots_nav)/config/base_local_planner.yaml" command="load" />
+  </node>
+</launch>

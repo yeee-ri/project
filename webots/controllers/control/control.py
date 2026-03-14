@@ -5,12 +5,13 @@ import math
 import rospy
 import tf2_ros
 import tf_conversions
-import time
-
+import numpy as np
 from geometry_msgs.msg import Twist, TransformStamped
 from nav_msgs.msg import Odometry
-from sensor_msgs.msg import LaserScan
+from sensor_msgs.msg import LaserScan, Image
+from cv_bridge import CvBridge
 from controller import Robot, Keyboard
+
 
 class WebotsNavController:
     def __init__(self):
@@ -27,11 +28,17 @@ class WebotsNavController:
 
         self.motors = [self.m1, self.m2, self.m3, self.m4]
         for m in self.motors:
-            m.setPosition(float('inf'))
+            m.setPosition(float("inf"))
             m.setVelocity(0.0)
 
         self.lidar = self.robot.getDevice("HeadLidar")
         self.lidar.enable(self.timestep)
+
+        self.rgb = self.robot.getDevice("kinect2RGB")
+        self.rgb.enable(self.timestep)
+
+        self.depth_sensor = self.robot.getDevice("kinect2D")
+        self.depth_sensor.enable(self.timestep)
 
         self.keyboard = Keyboard()
         self.keyboard.enable(self.timestep)
@@ -56,6 +63,8 @@ class WebotsNavController:
         self.base_frame = rospy.get_param("~base_frame", "base_link")
         self.odom_frame = rospy.get_param("~odom_frame", "odom")
         self.laser_frame = rospy.get_param("~laser_frame", "laser")
+        self.rgb_frame = rospy.get_param("~rgb_frame", "camera_color_frame")
+        self.depth_frame = rospy.get_param("~depth_frame", "camera_depth_frame")
 
         self.cmd_vx = 0.0
         self.cmd_vy = 0.0
@@ -74,47 +83,83 @@ class WebotsNavController:
         self.y = 0.0
         self.yaw = 0.0
 
-        self.last_odom_time = rospy.Time.now()
+        self.stamp_offset = rospy.Duration.from_sec(rospy.get_param("~stamp_offset", 0.03))
+        self.last_odom_time = rospy.Time.now() - self.stamp_offset
 
         rospy.Subscriber("/cmd_vel", Twist, self.cb_cmd_vel, queue_size=1)
         self.odom_pub = rospy.Publisher("/odom", Odometry, queue_size=20)
         self.scan_pub = rospy.Publisher("/scan", LaserScan, queue_size=20)
+        self.rgb_pub = rospy.Publisher("/camera/image_raw", Image, queue_size=1)
+        self.depth_pub = rospy.Publisher("/camera/depth/image_raw", Image, queue_size=1)
+
         self.tf_br = tf2_ros.TransformBroadcaster()
-        self.static_tf_br = tf2_ros.StaticTransformBroadcaster()        
-        
+        self.static_tf_br = tf2_ros.StaticTransformBroadcaster()
+
         laser_tf = TransformStamped()
-        laser_tf.header.stamp = rospy.Time.from_sec(time.time())
-        laser_tf.header.frame_id = "base_link"
-        laser_tf.child_frame_id = "laser"
-        
+        laser_tf.header.stamp = rospy.Time.now()
+        laser_tf.header.frame_id = self.base_frame
+        laser_tf.child_frame_id = self.laser_frame
         laser_tf.transform.translation.x = 0.0
         laser_tf.transform.translation.y = 0.0
         laser_tf.transform.translation.z = 0.155
-        
         q = tf_conversions.transformations.quaternion_from_euler(0, 0, 0)
         laser_tf.transform.rotation.x = q[0]
         laser_tf.transform.rotation.y = q[1]
         laser_tf.transform.rotation.z = q[2]
         laser_tf.transform.rotation.w = q[3]
-        
         self.static_tf_br.sendTransform(laser_tf)
 
-        print("controller init done")
-        print("lidar device:", self.lidar)
+        self.bridge = CvBridge()
+
+    def publish_sensors(self, stamp):
+        try:
+            w_rgb = self.rgb.getWidth()
+            h_rgb = self.rgb.getHeight()
+            rgb_raw = self.rgb.getImage()
+            if rgb_raw:
+                rgb_msg = Image()
+                rgb_msg.header.stamp = stamp
+                rgb_msg.header.frame_id = self.rgb_frame
+                rgb_msg.height = h_rgb
+                rgb_msg.width = w_rgb
+                rgb_msg.encoding = "bgra8"
+                rgb_msg.is_bigendian = 0
+                rgb_msg.step = w_rgb * 4
+                rgb_msg.data = rgb_raw
+                self.rgb_pub.publish(rgb_msg)
+
+            # w_d = self.depth_sensor.getWidth()
+            # h_d = self.depth_sensor.getHeight()
+            # depth_raw = self.depth_sensor.getRangeImage()
+            # if depth_raw:
+            #     depth_np = np.array(depth_raw, dtype=np.float32).reshape((h_d, w_d))
+            #     depth_msg = Image()
+            #     depth_msg.header.stamp = stamp
+            #     depth_msg.header.frame_id = self.depth_frame
+            #     depth_msg.height = h_d
+            #     depth_msg.width = w_d
+            #     depth_msg.encoding = "32FC1"
+            #     depth_msg.is_bigendian = 0
+            #     depth_msg.step = w_d * 4
+            #     depth_msg.data = depth_np.tobytes()
+            #     self.depth_pub.publish(depth_msg)
+
+        except Exception as e:
+            rospy.logerr("publish_sensors error: %s", e)
 
     def cb_cmd_vel(self, msg):
         self.cmd_vx = msg.linear.x
         self.cmd_vy = msg.linear.y
         self.cmd_wz = msg.angular.z
-        self.last_ros_cmd_time = rospy.Time.from_sec(time.time())
+        self.last_ros_cmd_time = rospy.Time.now()
 
     def drive_ik(self, vx, vy, wz):
         w1 = -self.kx * vx - self.ky * vy - self.kz * wz
-        w2 =  self.kx * vx - self.ky * vy - self.kz * wz
+        w2 = self.kx * vx - self.ky * vy - self.kz * wz
         w3 = -self.kx * vx + self.ky * vy - self.kz * wz
-        w4 =  self.kx * vx + self.ky * vy - self.kz * wz
+        w4 = self.kx * vx + self.ky * vy - self.kz * wz
         return [w1, w2, w3, w4]
-    
+
     def mecanum_fk(self, w1, w2, w3, w4):
         vx = (-w1 + w2 - w3 + w4) / (4.0 * self.kx)
         vy = (-w1 - w2 + w3 + w4) / (4.0 * self.ky)
@@ -125,7 +170,7 @@ class WebotsNavController:
         wz *= self.odom_scale_w
 
         return vx, vy, wz
-    
+
     def clamp(self, value, min_v, max_v):
         return max(min(value, max_v), min_v)
 
@@ -134,37 +179,37 @@ class WebotsNavController:
         updated = False
 
         while key != -1:
-            if key in (ord('W'), ord('w')):
+            if key in (ord("W"), ord("w")):
                 self.manual_vx = self.key_vx
                 self.manual_vy = 0.0
                 self.manual_wz = 0.0
                 updated = True
-            elif key in (ord('S'), ord('s')):
+            elif key in (ord("S"), ord("s")):
                 self.manual_vx = -self.key_vx
                 self.manual_vy = 0.0
                 self.manual_wz = 0.0
                 updated = True
-            elif key in (ord('A'), ord('a')):
+            elif key in (ord("A"), ord("a")):
                 self.manual_vx = 0.0
                 self.manual_vy = self.key_vy
                 self.manual_wz = 0.0
                 updated = True
-            elif key in (ord('D'), ord('d')):
+            elif key in (ord("D"), ord("d")):
                 self.manual_vx = 0.0
                 self.manual_vy = -self.key_vy
                 self.manual_wz = 0.0
                 updated = True
-            elif key in (ord('Q'), ord('q')):
+            elif key in (ord("Q"), ord("q")):
                 self.manual_vx = 0.0
                 self.manual_vy = 0.0
                 self.manual_wz = self.key_wz
                 updated = True
-            elif key in (ord('E'), ord('e')):
+            elif key in (ord("E"), ord("e")):
                 self.manual_vx = 0.0
                 self.manual_vy = 0.0
                 self.manual_wz = -self.key_wz
                 updated = True
-            elif key == ord(' '):
+            elif key == ord(" "):
                 self.manual_vx = 0.0
                 self.manual_vy = 0.0
                 self.manual_wz = 0.0
@@ -185,17 +230,14 @@ class WebotsNavController:
 
         return 0.0, 0.0, 0.0
 
-    def publish_odom_and_tf(self, vx_body, vy_body, wz):
-        now = rospy.Time.now()
-        dt = (now - self.last_odom_time).to_sec()
-
+    def publish_odom_and_tf(self, vx_body, vy_body, wz, stamp):
+        dt = (stamp - self.last_odom_time).to_sec()
         if dt <= 0.0:
-            dt = self.timestep / 1000.0
+            dt = self.dt
+        self.last_odom_time = stamp
 
-        self.last_odom_time = now
-
-        vx_body = -0.02*vx_body
-        vy_body = -0.008*vy_body
+        vx_body = -0.02 * vx_body
+        vy_body = -0.008 * vy_body
 
         dx = (vx_body * math.cos(self.yaw) - vy_body * math.sin(self.yaw)) * dt
         dy = (vx_body * math.sin(self.yaw) + vy_body * math.cos(self.yaw)) * dt
@@ -208,7 +250,7 @@ class WebotsNavController:
         q = tf_conversions.transformations.quaternion_from_euler(0, 0, self.yaw)
 
         t = TransformStamped()
-        t.header.stamp = now
+        t.header.stamp = stamp
         t.header.frame_id = self.odom_frame
         t.child_frame_id = self.base_frame
         t.transform.translation.x = self.x
@@ -221,10 +263,9 @@ class WebotsNavController:
         self.tf_br.sendTransform(t)
 
         odom = Odometry()
-        odom.header.stamp = now
+        odom.header.stamp = stamp
         odom.header.frame_id = self.odom_frame
         odom.child_frame_id = self.base_frame
-
         odom.pose.pose.position.x = self.x
         odom.pose.pose.position.y = self.y
         odom.pose.pose.position.z = 0.0
@@ -232,31 +273,26 @@ class WebotsNavController:
         odom.pose.pose.orientation.y = q[1]
         odom.pose.pose.orientation.z = q[2]
         odom.pose.pose.orientation.w = q[3]
-
         odom.twist.twist.linear.x = vx_body
         odom.twist.twist.linear.y = vy_body
         odom.twist.twist.angular.z = wz
-
         self.odom_pub.publish(odom)
 
-    def publish_scan(self):
+    def publish_scan(self, stamp):
         ranges = list(self.lidar.getRangeImage())
-
-        scan = LaserScan()
-        scan.header.stamp = rospy.Time.now()
-        scan.header.frame_id = self.laser_frame
-
         n = len(ranges)
 
+        scan = LaserScan()
+        scan.header.stamp = stamp
+        scan.header.frame_id = self.laser_frame
         scan.angle_min = -math.pi
         scan.angle_max = math.pi
         scan.angle_increment = (scan.angle_max - scan.angle_min) / max(n - 1, 1)
+        scan.time_increment = 0.0
+        scan.scan_time = self.dt
         scan.range_min = self.lidar.getMinRange()
         scan.range_max = self.lidar.getMaxRange()
-
-   
         scan.ranges = ranges[::-1]
-
         self.scan_pub.publish(scan)
 
     def run(self):
@@ -275,8 +311,12 @@ class WebotsNavController:
 
             vx_body, vy_body, wz = self.mecanum_fk(wheels[0], wheels[1], wheels[2], wheels[3])
 
-            self.publish_odom_and_tf(vx_body, vy_body, wz)
-            self.publish_scan()
+            stamp = rospy.Time.now() - self.stamp_offset
+
+            self.publish_sensors(stamp)
+            self.publish_odom_and_tf(vx_body, vy_body, wz, stamp)
+            self.publish_scan(stamp)
+
 
 if __name__ == "__main__":
     node = WebotsNavController()
