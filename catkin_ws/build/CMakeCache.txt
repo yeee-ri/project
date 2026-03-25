@@ -1041,6 +1041,12 @@ voxel_grid_SOURCE_DIR:STATIC=/home/sj/Desktop/project/catkin_ws/src/navigation/v
 warehouse_ros_DIR:PATH=/opt/ros/noetic/share/warehouse_ros/cmake
 
 //Value Computed by CMake
+webots_amcl_BINARY_DIR:STATIC=/home/sj/Desktop/project/catkin_ws/build/webots_amcl
+
+//Value Computed by CMake
+webots_amcl_SOURCE_DIR:STATIC=/home/sj/Desktop/project/catkin_ws/src/webots_amcl
+
+//Value Computed by CMake
 webots_nav_BINARY_DIR:STATIC=/home/sj/Desktop/project/catkin_ws/build/webots_nav
 
 //Value Computed by CMake
@@ -1221,7 +1227,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=38
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=39
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

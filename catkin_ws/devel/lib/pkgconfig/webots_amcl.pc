@@ -1,0 +1,8 @@
+prefix=/home/sj/Desktop/project/catkin_ws/devel
+
+Name: webots_amcl
+Description: Description of webots_amcl
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

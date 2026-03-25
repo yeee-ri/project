@@ -60,6 +60,7 @@ all: hector_slam/hector_slam_launch/all
 all: navigation/navigation/all
 all: hector_slam/hector_map_tools/all
 all: hector_slam/hector_nav_msgs/all
+all: webots_amcl/all
 all: hector_slam/hector_geotiff/all
 all: hector_slam/hector_geotiff_plugins/all
 all: hector_slam/hector_marker_drawing/all
@@ -98,6 +99,7 @@ preinstall: hector_slam/hector_slam_launch/preinstall
 preinstall: navigation/navigation/preinstall
 preinstall: hector_slam/hector_map_tools/preinstall
 preinstall: hector_slam/hector_nav_msgs/preinstall
+preinstall: webots_amcl/preinstall
 preinstall: hector_slam/hector_geotiff/preinstall
 preinstall: hector_slam/hector_geotiff_plugins/preinstall
 preinstall: hector_slam/hector_marker_drawing/preinstall
@@ -141,6 +143,7 @@ clean: hector_slam/hector_slam_launch/clean
 clean: navigation/navigation/clean
 clean: hector_slam/hector_map_tools/clean
 clean: hector_slam/hector_nav_msgs/clean
+clean: webots_amcl/clean
 clean: hector_slam/hector_geotiff/clean
 clean: hector_slam/hector_geotiff_plugins/clean
 clean: hector_slam/hector_marker_drawing/clean
@@ -1115,6 +1118,24 @@ navigation/voxel_grid/clean: navigation/voxel_grid/CMakeFiles/_run_tests_voxel_g
 navigation/voxel_grid/clean: navigation/voxel_grid/CMakeFiles/clean_test_results_voxel_grid.dir/clean
 
 .PHONY : navigation/voxel_grid/clean
+
+#=============================================================================
+# Directory level rules for directory webots_amcl
+
+# Recursive "all" directory target.
+webots_amcl/all:
+
+.PHONY : webots_amcl/all
+
+# Recursive "preinstall" directory target.
+webots_amcl/preinstall:
+
+.PHONY : webots_amcl/preinstall
+
+# Recursive "clean" directory target.
+webots_amcl/clean:
+
+.PHONY : webots_amcl/clean
 
 #=============================================================================
 # Directory level rules for directory webots_nav

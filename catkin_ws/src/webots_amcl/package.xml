@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>webots_amcl</name>
+  <version>0.0.1</version>
+  <description>AMCL + move_base package for Webots mobile robot</description>
+
+  <maintainer email="you@todo.todo">you</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+
+  <exec_depend>tf</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+
+  <exec_depend>map_server</exec_depend>
+  <exec_depend>amcl</exec_depend>
+  <exec_depend>move_base</exec_depend>
+  <exec_depend>costmap_2d</exec_depend>
+  <exec_depend>base_local_planner</exec_depend>
+
+  <exec_depend>rviz</exec_depend>
+</package>
