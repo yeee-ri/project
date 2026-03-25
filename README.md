@@ -1,7 +1,13 @@
-navigation
+Navigation
 
-webots home_service.wbt 
+cd Desktop/project/catkin_ws/src/webots_amcl
+./run_navigation.sh
 
-roslaunch webots_nav move_base.launch
+Save location
+cd Desktop/project/webots/codes
+python get_tf.py
 
-roslaunch hector_slam_launch tutorial.launch
+Move to saved location
+cd Desktop/project/webots/codes
+python move_to_goal.py
+
